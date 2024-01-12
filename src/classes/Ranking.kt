@@ -1,12 +1,14 @@
 package classes
 
-abstract class Ranking {
+abstract class Ranking<T> {
     // Attributes
-    abstract var rankList: ArrayList<Any>
-    abstract var grades: ArrayList<Double>
+    abstract var rankList: ArrayList<T>
+    abstract var ratings: ArrayList<Double>
+    abstract var oldRatings: ArrayList<Double>
 
     //Methods
     abstract fun size(): Int
-    abstract fun getTop(mejor: Int): Any
+    abstract fun get(index: Int): Any
+    abstract fun add(newItem: T)
     // Añadir más con el tiempo :)
 }
