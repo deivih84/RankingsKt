@@ -13,6 +13,14 @@ class AnimeRanking: Ranking<Anime>() {
     override fun loadRanking(){
 
     }
+
+    /**
+     * TODO Hacer el array en el que van englobados todos los objetos
+     *
+     */
+    override fun saveRanking(){
+
+    }
     override fun size(): Int {
         return rankList.size
     }
@@ -89,4 +97,10 @@ class AnimeRanking: Ranking<Anime>() {
         }
         return pos
     }
+
+    override fun toString(): String {
+        return "AnimeRanking(rankList=$rankList, ratings=$ratings, initRatings=$initRatings)"
+    }
+
+
 }

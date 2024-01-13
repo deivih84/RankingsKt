@@ -6,6 +6,7 @@ abstract class Ranking<T> {
 
     //Methods
     abstract fun loadRanking()
+    abstract fun saveRanking()
     abstract fun size(): Int
     abstract fun get(index: Int): Any
 //    abstract fun add(newItem: T)
