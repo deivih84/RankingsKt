@@ -1,6 +1,9 @@
 package classes.animes
 
 import classes.Ranking
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.io.File
 
 class AnimeRanking: Ranking<Anime>() {
 
@@ -11,7 +14,8 @@ class AnimeRanking: Ranking<Anime>() {
 
     // Methods
     override fun loadRanking(){
-
+        // Create and deserialize a TypeToken that represents a list of anime objects
+        rankList = Gson().fromJson(File("animeFile.json").readText(), object : TypeToken<ArrayList<Anime>>() {}.type)
     }
 
     /**
@@ -29,6 +33,15 @@ class AnimeRanking: Ranking<Anime>() {
     }
 
     // Custom methods
+    override fun organizeRanking() {
+        if (rankList.any{ it.finalRating == null }) {
+            throw IllegalStateException("There are still some Animes to rank.")
+        // You can´t list the animes if you haven´t rated them all yet
+        } else{
+            quicksort(rankList, 0, rankList.size - 1)
+        }
+    }
+
     fun addAnime(newItem: String, rating: Double?, initRating: Double, genre: AGenre) {
         if (rating == null){
             rankList.add(Anime(newItem, initRating, genre))
@@ -100,6 +113,36 @@ class AnimeRanking: Ranking<Anime>() {
 
     override fun toString(): String {
         return "AnimeRanking(rankList=$rankList, ratings=$ratings, initRatings=$initRatings)"
+    }
+
+    override fun quicksort(arr: ArrayList<Anime>, start: Int, end: Int) {
+        if (start < end) {
+            val pivotIndex = partition(arr, start, end)
+            quicksort(arr, start, pivotIndex - 1)
+            quicksort(arr, pivotIndex + 1, end)
+        }
+    }
+
+    private fun partition(arr: ArrayList<Anime>, start: Int, end: Int): Int {
+        val pivot = arr[end]
+        var i = start - 1
+
+        for (j in start..<end) {
+            if (arr[j].finalRating!! <= pivot.finalRating!!) {
+                i++
+                // Swap arr[i] and arr[j]
+                val temp = arr[i]
+                arr[i] = arr[j]
+                arr[j] = temp
+            }
+        }
+
+        // Swap arr[i + 1] and arr[end] (placing the pivot in its final position)
+        val temp = arr[i + 1]
+        arr[i + 1] = arr[end]
+        arr[end] = temp
+
+        return i + 1
     }
 
 

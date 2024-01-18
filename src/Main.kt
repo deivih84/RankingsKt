@@ -7,13 +7,24 @@ import kotlin.reflect.typeOf
 
 fun main() {
     val jojo = Anime("Jojo", 6.0, 9.0, AGenre.Shounen)
+    val evangelion = Anime("Evangelion", 8.5, 7.5, AGenre.Mecha)
 
-// Almacenar
+/*// Almacenar
     val jsonString = Gson().toJson(jojo)
     File("animeFile.json").appendText(jsonString)
 
 // Recuperar
     val jsonStringRecuperado = File("objeto1.json").readText()
     val objetoRecuperado: Anime = Gson().fromJson(jsonStringRecuperado, Anime::class.java)
-    println(objetoRecuperado.genre)
+    println(objetoRecuperado.genre)*/
+
+
+    // Crear un ArrayList de números desordenados
+    val numeros = arrayListOf(jojo, evangelion)
+
+    // Ordenar en orden ascendente y crear una nueva lista ordenada
+    val numerosOrdenados = numeros.q
+    // Imprimir la lista original y la lista ordenada
+    println("Lista original: $numeros")
+    println("Lista ordenada (ascendente): $numerosOrdenados")
 }
