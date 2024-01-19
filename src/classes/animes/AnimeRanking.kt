@@ -32,7 +32,6 @@ class AnimeRanking: Ranking<Anime>() {
         return rankList[index]
     }
 
-    // Custom methods
     override fun organizeRanking() {
         if (rankList.any{ it.finalRating == null }) {
             throw IllegalStateException("There are still some Animes to rank.")
@@ -42,6 +41,19 @@ class AnimeRanking: Ranking<Anime>() {
         }
     }
 
+    override fun toString(): String {
+        return "AnimeRanking(rankList=$rankList, ratings=$ratings, initRatings=$initRatings)"
+    }
+
+    override fun quicksort(arr: ArrayList<Anime>, start: Int, end: Int) {
+        if (start < end) {
+            val pivotIndex = partition(arr, start, end)
+            quicksort(arr, start, pivotIndex - 1)
+            quicksort(arr, pivotIndex + 1, end)
+        }
+    }
+
+    // Custom methods
     fun addAnime(newItem: String, rating: Double?, initRating: Double, genre: AGenre) {
         if (rating == null){
             rankList.add(Anime(newItem, initRating, genre))
@@ -55,6 +67,7 @@ class AnimeRanking: Ranking<Anime>() {
     private fun worstAnime(): Anime {
         return rankList[indexSmallest(rankList)]
     }
+
     private fun topFirstImpresion(): Anime {
         return rankList[indexBiggest(rankList)]
     }
@@ -109,18 +122,6 @@ class AnimeRanking: Ranking<Anime>() {
             throw IllegalStateException("The list doesn´t have any rated animes yet")
         }
         return pos
-    }
-
-    override fun toString(): String {
-        return "AnimeRanking(rankList=$rankList, ratings=$ratings, initRatings=$initRatings)"
-    }
-
-    override fun quicksort(arr: ArrayList<Anime>, start: Int, end: Int) {
-        if (start < end) {
-            val pivotIndex = partition(arr, start, end)
-            quicksort(arr, start, pivotIndex - 1)
-            quicksort(arr, pivotIndex + 1, end)
-        }
     }
 
     private fun partition(arr: ArrayList<Anime>, start: Int, end: Int): Int {
