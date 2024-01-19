@@ -23,8 +23,6 @@ fun main() {
     val numeros = arrayListOf(jojo, evangelion)
 
     // Ordenar en orden ascendente y crear una nueva lista ordenada
-    val numerosOrdenados = numeros.q
     // Imprimir la lista original y la lista ordenada
     println("Lista original: $numeros")
-    println("Lista ordenada (ascendente): $numerosOrdenados")
 }

@@ -18,16 +18,16 @@ class AnimeRanking: Ranking<Anime>() {
         rankList = Gson().fromJson(File("animeFile.json").readText(), object : TypeToken<ArrayList<Anime>>() {}.type)
     }
 
-    /**
-     * TODO Hacer el array en el que van englobados todos los objetos
-     *
-     */
     override fun saveRanking(){
-
+        organizeRanking()
+        // Create a Gson type object (The whole list) and write it into the file
+        File("animeFile.json").appendText(Gson().toJson(rankList))
     }
+
     override fun size(): Int {
         return rankList.size
     }
+
     override fun get(index: Int): Anime {
         return rankList[index]
     }
@@ -54,6 +54,7 @@ class AnimeRanking: Ranking<Anime>() {
     }
 
     // Custom methods
+
     fun addAnime(newItem: String, rating: Double?, initRating: Double, genre: AGenre) {
         if (rating == null){
             rankList.add(Anime(newItem, initRating, genre))
