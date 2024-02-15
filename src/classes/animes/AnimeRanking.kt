@@ -55,22 +55,30 @@ class AnimeRanking: Ranking<Anime>() {
 
     // Custom methods
 
-    fun addAnime(newItem: String, rating: Double?, initRating: Double, genre: AGenre) {
+    fun addAnime(newItem: String, rating: Double?, initRating: Double, genre: AGenre, epsPerSeason: ArrayList<Int>) {
         if (rating == null){
-            rankList.add(Anime(newItem, initRating, genre))
+            rankList.add(Anime(newItem, initRating, genre, epsPerSeason))
         } else {
-            rankList.add(Anime(newItem, rating, initRating, genre))
+            rankList.add(Anime(newItem, rating, initRating, genre, epsPerSeason))
         }
     }
+
+    /**
+     * Returns the best anime
+     *
+     * @return Best anime :)
+     */
     private fun topAnime(): Anime {
-        return rankList[0]
-    }
-    private fun worstAnime(): Anime {
-        return rankList[indexSmallest(rankList)]
+        return rankList[indexBiggest(rankList)]
     }
 
-    private fun topFirstImpresion(): Anime {
-        return rankList[indexBiggest(rankList)]
+    /**
+     * Returns the worst Anime rated by first impression
+     *
+     * @return Worst anime :(
+     */
+    private fun worstAnime(): Anime {
+        return rankList[indexSmallest(rankList)]
     }
 
     /**
