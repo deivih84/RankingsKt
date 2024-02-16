@@ -13,25 +13,49 @@ class AnimeRanking: Ranking<Anime>() {
     private var initRatings: ArrayList<Double> = arrayListOf()
 
     // Methods
+
+    /**
+     * TODO
+     *
+     */
     override fun loadRanking(){
         // Create and deserialize a TypeToken that represents a list of anime objects
         rankList = Gson().fromJson(File("animeFile.json").readText(), object : TypeToken<ArrayList<Anime>>() {}.type)
     }
 
+    /**
+     * TODO
+     *
+     */
     override fun saveRanking(){
         organizeRanking()
         // Create a Gson type object (The whole list) and write it into the file
         File("animeFile.json").appendText(Gson().toJson(rankList))
     }
 
+    /**
+     * TODO
+     *
+     * @return
+     */
     override fun size(): Int {
         return rankList.size
     }
 
+    /**
+     * TODO
+     *
+     * @param index
+     * @return
+     */
     override fun get(index: Int): Anime {
         return rankList[index]
     }
 
+    /**
+     * TODO
+     *
+     */
     override fun organizeRanking() {
         if (rankList.any{ it.finalRating == null }) {
             throw IllegalStateException("There are still some Animes to rank.")
@@ -41,6 +65,11 @@ class AnimeRanking: Ranking<Anime>() {
         }
     }
 
+    /**
+     * TODO
+     *
+     * @return
+     */
     override fun toString(): String {
         return "AnimeRanking(rankList=$rankList, ratings=$ratings, initRatings=$initRatings)"
     }
@@ -55,18 +84,27 @@ class AnimeRanking: Ranking<Anime>() {
 
     // Custom methods
 
-    fun addAnime(newItem: String, rating: Double?, initRating: Double, genre: AGenre, epsPerSeason: ArrayList<Int>) {
+    /**
+     * Add an anime to your ranking, already rated or not.
+     *
+     * @param name Title of your anime
+     * @param rating Ranking given to your anime (Optional as it can be given later on)
+     * @param initRating Obligatory first impression rating of your anime
+     * @param genre Category in which your anime falls (Check AGenre.kt to see your options)
+     * @param epsPerSeason A prebuild array with the amount of episodes your anime has each season
+     */
+    fun addAnime(name: String, rating: Double?, initRating: Double, genre: AGenre, epsPerSeason: ArrayList<Int>) {
         if (rating == null){
-            rankList.add(Anime(newItem, initRating, genre, epsPerSeason))
+            rankList.add(Anime(name, initRating, genre, epsPerSeason))
         } else {
-            rankList.add(Anime(newItem, rating, initRating, genre, epsPerSeason))
+            rankList.add(Anime(name, rating, initRating, genre, epsPerSeason))
         }
     }
 
     /**
      * Returns the best anime
      *
-     * @return Best anime :)
+     * @return Best ranked anime :)
      */
     private fun topAnime(): Anime {
         return rankList[indexBiggest(rankList)]
@@ -75,7 +113,7 @@ class AnimeRanking: Ranking<Anime>() {
     /**
      * Returns the worst Anime rated by first impression
      *
-     * @return Worst anime :(
+     * @return Worst ranked anime :(
      */
     private fun worstAnime(): Anime {
         return rankList[indexSmallest(rankList)]

@@ -6,7 +6,7 @@ import kotlin.reflect.typeOf
 
 
 fun main() {
-    val jojo = Anime("Jojo", 6.0, 9.0, AGenre.Shounen)
+    val jojo = Anime("Jojo", 6.0, 9.0, AGenre.Shounen, )
     val evangelion = Anime("Evangelion", 8.5, 7.5, AGenre.Mecha)
 
 /*// Almacenar
