@@ -9,6 +9,6 @@ package classes.animes
  * @property genre Genre of the anime
  * @property nEpisodes Array of the number of episodes in each season/part
  */
-class Anime (var name: String, var finalRating: Double?, var initRating: Double, val genre: AGenre, val nEpisodes: ArrayList<Int>){
-    constructor (name: String, initRating: Double, genre: AGenre, episodes: ArrayList<Int>): this(name, null, initRating, genre, episodes)
+class Anime(var name: String, var finalRating: Double?, var initRating: Double, val genre: AGenre, val nEpisodes: Array<Int>){
+    constructor (name: String, initRating: Double, genre: AGenre, episodes: Array<Int>): this(name, null, initRating, genre, episodes)
 }

@@ -93,7 +93,7 @@ class AnimeRanking: Ranking<Anime>() {
      * @param genre Category in which your anime falls (Check AGenre.kt to see your options)
      * @param epsPerSeason A prebuild array with the amount of episodes your anime has each season
      */
-    fun addAnime(name: String, rating: Double?, initRating: Double, genre: AGenre, epsPerSeason: ArrayList<Int>) {
+    fun addAnime(name: String, rating: Double?, initRating: Double, genre: AGenre, epsPerSeason: Array<Int>) {
         if (rating == null){
             rankList.add(Anime(name, initRating, genre, epsPerSeason))
         } else {

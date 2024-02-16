@@ -1,20 +1,25 @@
 import classes.animes.AGenre
 import classes.animes.Anime
+
+//
 import com.google.gson.Gson
 import java.io.File
-import kotlin.reflect.typeOf
-
+//
 
 fun main() {
-    val jojo = Anime("Jojo", 6.0, 9.0, AGenre.Shounen, )
-    val evangelion = Anime("Evangelion", 8.5, 7.5, AGenre.Mecha)
 
-/*// Almacenar
-    val jsonString = Gson().toJson(jojo)
+    val jojo = Anime("Jojo", 6.0, 9.0, AGenre.Shounen, arrayOf(9, 17, 48, 39, 39, 38))
+    val evangelion = Anime("Evangelion", 8.5, 7.5, AGenre.Mecha, arrayOf(26))
+
+// Almacenar
+
+    val jsonString = Gson().toJson(arrayOf(jojo, evangelion))
+//    val jsonString = Gson().toJson(jojo)
+
     File("animeFile.json").appendText(jsonString)
 
 // Recuperar
-    val jsonStringRecuperado = File("objeto1.json").readText()
+/*    val jsonStringRecuperado = File("objeto1.json").readText()
     val objetoRecuperado: Anime = Gson().fromJson(jsonStringRecuperado, Anime::class.java)
     println(objetoRecuperado.genre)*/
 
