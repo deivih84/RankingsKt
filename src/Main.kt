@@ -16,7 +16,7 @@ fun main() {
     val jsonString = Gson().toJson(arrayOf(jojo, evangelion))
 //    val jsonString = Gson().toJson(jojo)
 
-    File("classes/animes/animeFile.json").appendText(jsonString)
+    File("classes/animes/animeFile.json").writeText(jsonString)
 
 // Recuperar
 /*    val jsonStringRecuperado = File("objeto1.json").readText()
